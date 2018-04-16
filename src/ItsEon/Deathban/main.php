@@ -1,5 +1,5 @@
 <?php
-namespace ItsEon\DeathBan;
+namespace ItsEon\Deathban;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player;
