@@ -1,8 +1,7 @@
 <?php
 namespace ItsEon\Deathban;
 use pocketmine\event\Listener;
-use pocketmine\event\player;
-use pocketmine\event\player\{PlayerJoinEvent, PlayerDeathEvent};
+use pocketmine\event\{player\ PlayerJoinEvent, PlayerDeathEvent};
 use pocketmine\permission;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
