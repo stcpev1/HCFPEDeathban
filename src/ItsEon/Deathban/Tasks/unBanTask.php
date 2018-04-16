@@ -7,7 +7,7 @@ use pocketmine\scheduler\PluginTask;
 class unBanTask extends PluginTask
 {
 	private $main;
-	public function __construct(main $main)
+	public function __construct(ItsEon\Deathban\main $main)
 	{
 		parent::__construct($main);
 		$this->main = $main;
