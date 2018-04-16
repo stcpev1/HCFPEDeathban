@@ -24,7 +24,7 @@ class main extends PluginBase implements Listener
 	public function onEnable()
 	{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getServer()->getScheduler()->scheduleRepeatingTask(new \Tasks\unBanTask($this), 20);
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new \ItsEon\Deathban\Tasks\unBanTask($this), 20);
 		((!file_exists($this->getDataFolder()) . "config.yml") ? $this->saveResource("config.yml", false) : '');
 		$config = new Config($this->getDataFolder() . "config.yml");
 		$this->banTime = ((is_numeric($time = $config->get("time"))) ? $time : 60);
@@ -35,7 +35,7 @@ class main extends PluginBase implements Listener
 	public function onJoin(PlayerJoinEvent $ev)
 	{
 		if ($this->isBanned($ev->getPlayer())) {
-			$this->getServer()->getScheduler()->scheduleDelayedTask(new \Tasks\callBackKick($this, $ev->getPlayer()), 10);
+			$this->getServer()->getScheduler()->scheduleDelayedTask(new \ItsEon\Deathban\Tasks\callBackKick($this, $ev->getPlayer()), 10);
 		}
 	}
 	public function onDeath(PlayerDeathEvent $ev)
