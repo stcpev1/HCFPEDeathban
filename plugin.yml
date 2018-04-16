@@ -1,6 +1,6 @@
 name: DeathBan
 version: 1.0.0
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8]
-author: ItsEon
+api: [3.0.0-ALPHA11, 3.0.0-ALPHA12]
+author: ItsEon, updated by VMPE.
 description: DeathBan
-main: ItsEon\DeathBan\main
+main: ItsEon\Deathban\main
