@@ -1,16 +1,20 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace ItsEon\Deathban\Tasks;
 
-/**
- * Description of callBackKick
- *
- * @author User
- */
-class callBackKick {
-    //put your code here
+use pocketmine\scheduler\PluginTask;
+
+class callBackKick extends PluginTask
+{
+	private $main, $player;
+	public function __construct(Main $main, \pocketmine\Player $player)
+	{
+		parent::__construct($main);
+		$this->main = $main;
+		$this->player = $player;
+	}
+	public function onRun(int $tick)
+	{
+		$this->player->kick('§8[§aHCF§8]§cDeathbanned for ' . $this->main->getBanTime($this->player), false);
+	}
 }

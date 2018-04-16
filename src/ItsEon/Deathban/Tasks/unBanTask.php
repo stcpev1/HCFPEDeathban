@@ -1,6 +1,6 @@
 <?php
 
-namespace ItsEon\Deathban;
+namespace ItsEon\Deathban\Tasks;
 
 use pocketmine\scheduler\PluginTask;
 
