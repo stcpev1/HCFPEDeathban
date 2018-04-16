@@ -5,7 +5,6 @@ use pocketmine\event\{player\ PlayerJoinEvent, PlayerDeathEvent};
 use pocketmine\permission;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
 use pocketmine\utils\Config;
 class main extends PluginBase implements Listener
 {
@@ -115,32 +114,5 @@ class main extends PluginBase implements Listener
 				$this->bans[$index]['time'] = $ban['time'] - 1;
 			}
 		}
-	}
-}
-class unBanTask extends PluginTask
-{
-	private $main;
-	public function __construct(Main $main)
-	{
-		parent::__construct($main);
-		$this->main = $main;
-	}
-	public function onRun(int $tick)
-	{
-		$this->main->doTick();
-	}
-}
-class callBackKick extends PluginTask
-{
-	private $main, $player;
-	public function __construct(Main $main, \pocketmine\Player $player)
-	{
-		parent::__construct($main);
-		$this->main = $main;
-		$this->player = $player;
-	}
-	public function onRun(int $tick)
-	{
-		$this->player->kick('§8[§aHCF§8]§cDeathbanned for ' . $this->main->getBanTime($this->player), false);
 	}
 }
