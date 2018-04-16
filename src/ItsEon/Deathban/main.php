@@ -3,13 +3,14 @@ namespace ItsEon\DeathBan;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player;
-use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\event\player\{PlayerJoinEvent, PlayerDeathEvent};
 use pocketmine\permission;
 use pocketmine\plugin\PluginBase;
+use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\utils\Config;
 
-class Main extends PluginBase implements Listener
+class main extends PluginBase implements Listener
 {
 	private $bans = [], $banTime = 60;
 
@@ -37,7 +38,7 @@ class Main extends PluginBase implements Listener
 	{
 	}
 
-	public function onJoin(player\PlayerJoinEvent $ev)
+	public function onJoin(PlayerJoinEvent $ev)
 	{
 		if ($this->isBanned($ev->getPlayer())) {
 			$this->getServer()->getScheduler()->scheduleDelayedTask(new callBackKick($this, $ev->getPlayer()), 10);
@@ -79,7 +80,7 @@ class Main extends PluginBase implements Listener
 		array_push($this->bans, $ban);
 	}
 
-	public function getBanTime(\pocketmine\Player $p)
+	public function getBanTime(Player $p)
 	{
 		foreach ($this->bans as $ban) {
 			if ($ban['bans']['name'] == $p->getDisplayName() OR $ban['bans']['ip'] == $p->getAddress() OR $ban['bans']['cid'] == $p->getClientId()) {
@@ -139,7 +140,7 @@ class unBanTask extends PluginTask
 		$this->main = $main;
 	}
 
-	public function onRun($tick)
+	public function onRun(int $tick)
 	{
 		$this->main->doTick();
 	}
@@ -156,7 +157,7 @@ class callBackKick extends PluginTask
 		$this->player = $player;
 	}
 
-	public function onRun($tick)
+	public function onRun(int $tick)
 	{
 		$this->player->kick('§8[§aHCF§8]§cDeathbanned for ' . $this->main->getBanTime($this->player), false);
 	}
