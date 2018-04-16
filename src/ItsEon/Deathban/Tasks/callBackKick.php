@@ -7,7 +7,7 @@ use pocketmine\scheduler\PluginTask;
 class callBackKick extends PluginTask
 {
 	private $main, $player;
-	public function __construct(Main $main, \pocketmine\Player $player)
+	public function __construct(main $main, \pocketmine\Player $player)
 	{
 		parent::__construct($main);
 		$this->main = $main;
