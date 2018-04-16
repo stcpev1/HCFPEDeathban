@@ -1,6 +1,5 @@
 <?php
 namespace ItsEon\Deathban;
-
 use pocketmine\event\Listener;
 use pocketmine\event\player;
 use pocketmine\event\player\{PlayerJoinEvent, PlayerDeathEvent};
@@ -9,11 +8,9 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\utils\Config;
-
 class main extends PluginBase implements Listener
 {
 	private $bans = [], $banTime = 60;
-
 	/*
 	 * $bans = [
 	 *[
@@ -33,25 +30,21 @@ class main extends PluginBase implements Listener
 		$config = new Config($this->getDataFolder() . "config.yml");
 		$this->banTime = ((is_numeric($time = $config->get("time"))) ? $time : 60);
 	}
-
 	public function onDisable()
 	{
 	}
-
 	public function onJoin(PlayerJoinEvent $ev)
 	{
 		if ($this->isBanned($ev->getPlayer())) {
 			$this->getServer()->getScheduler()->scheduleDelayedTask(new callBackKick($this, $ev->getPlayer()), 10);
 		}
 	}
-
 	public function onDeath(PlayerDeathEvent $ev)
 	{
 		$this->addBan($ev->getPlayer());
 		$ev->getPlayer()->kick('§8[§aHCF§8]§cDeathBanned For 15 Minutes ' . $this->getBanTime($ev->getPlayer()), false);
 	}
-
-	private function isBanned(\pocketmine\Player $p)
+	private function isBanned(Player $p)
 	{
 		foreach ($this->bans as $ban) {
 			if ($ban['bans']['name'] == $p->getDisplayName()) {
@@ -66,8 +59,7 @@ class main extends PluginBase implements Listener
 		}
 		return false;
 	}
-
-	private function addBan(\pocketmine\Player $p)
+	private function addBan(Player $p)
 	{
 		$ban = [
 			"bans" => [
@@ -79,7 +71,6 @@ class main extends PluginBase implements Listener
 		];
 		array_push($this->bans, $ban);
 	}
-
 	public function getBanTime(Player $p)
 	{
 		foreach ($this->bans as $ban) {
@@ -112,12 +103,10 @@ class main extends PluginBase implements Listener
 		}
 		return 0;
 	}
-
 	public function doTick()
 	{
 		$this->update();
 	}
-
 	private function update()
 	{
 		foreach ($this->bans as $index => $ban) {
@@ -129,34 +118,28 @@ class main extends PluginBase implements Listener
 		}
 	}
 }
-
 class unBanTask extends PluginTask
 {
 	private $main;
-
 	public function __construct(Main $main)
 	{
 		parent::__construct($main);
 		$this->main = $main;
 	}
-
 	public function onRun(int $tick)
 	{
 		$this->main->doTick();
 	}
 }
-
 class callBackKick extends PluginTask
 {
 	private $main, $player;
-
 	public function __construct(Main $main, \pocketmine\Player $player)
 	{
 		parent::__construct($main);
 		$this->main = $main;
 		$this->player = $player;
 	}
-
 	public function onRun(int $tick)
 	{
 		$this->player->kick('§8[§aHCF§8]§cDeathbanned for ' . $this->main->getBanTime($this->player), false);
