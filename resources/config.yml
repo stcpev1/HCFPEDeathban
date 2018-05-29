@@ -1,5 +1,5 @@
 ---
 # Death Ban Config
 # Time is based in second
-time: "5"
+time: "900"
 ...
